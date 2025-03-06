@@ -1,0 +1,220 @@
+<div class="bg-neutral-100 text-neutral-600 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="p-4 bg-white shadow-md border-b border-primary-light">
+    <h1 class="text-lg font-bold text-primary-dark">Gerar Boleto</h1>
+  </header>
+
+
+  <app-alert *ngIf="alertMessage()" [type]="alertType()" [message]="alertMessage() || ''" [autoClose]="true">
+  </app-alert>
+
+
+  <!-- Conteúdo Principal -->
+  <div class="flex flex-col items-center w-full p-6">
+    <div *ngIf="showAlert"
+      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg shadow-md w-full mb-4">
+      <strong>Atenção!</strong> Você possui parcelas em atraso.
+      <button (click)="onRenegotiation()"
+        class="ml-2 text-red-600 font-bold underline hover:text-red-800">Renegociar</button>
+    </div>
+
+    <!-- Card de geração de boleto -->
+    <div class="bg-white p-6 rounded-lg shadow-[0px_4px_12px_rgb(160,196,255,0.5)] w-full">
+      <h2 class="text-lg font-bold text-primary-dark mb-4">Gerar Boleto do Mês Atual</h2>
+
+      <!-- Opções de Geração (Apenas uma pode ser selecionada) -->
+      <div class="space-y-3">
+        <label class="flex items-center space-x-3 cursor-pointer">
+          <input type="radio" name="boletoOption" class="hidden" (change)="onOptionChange('generatePdf')" />
+          <span
+            class="w-5 h-5 flex justify-center items-center border border-primary-dark rounded-full transition-all duration-300"
+            [ngClass]="{'bg-gradient-to-r from-blue-500 to-blue-300': selectedOption === 'generatePdf'}">
+          </span>
+          <span class="text-neutral-800">Gerar boleto em PDF</span>
+        </label>
+
+        <label class="flex items-center space-x-3 cursor-pointer">
+          <input type="radio" name="boletoOption" class="hidden" (change)="onOptionChange('sendEmail')" />
+          <span
+            class="w-5 h-5 flex justify-center items-center border border-primary-dark rounded-full transition-all duration-300"
+            [ngClass]="{'bg-gradient-to-r from-blue-500 to-blue-300': selectedOption === 'sendEmail'}">
+          </span>
+          <span class="text-neutral-800">Enviar por e-mail</span>
+        </label>
+
+        <div *ngIf="selectedOption === 'sendEmail'" class="mt-2">
+          <label class="block text-neutral-700">E-mail:</label>
+          <input type="email" [(ngModel)]="email"
+            class="w-full px-3 py-2 rounded-lg border border-primary-light focus:ring focus:ring-blue-300" />
+        </div>
+
+        <label class="flex items-center space-x-3 cursor-pointer">
+          <input type="radio" name="boletoOption" class="hidden" (change)="onOptionChange('copyBarcode')" />
+          <span
+            class="w-5 h-5 flex justify-center items-center border border-primary-dark rounded-full transition-all duration-300"
+            [ngClass]="{'bg-gradient-to-r from-blue-500 to-blue-300': selectedOption === 'copyBarcode'}">
+          </span>
+          <span class="text-neutral-800">Copiar código de barras</span>
+        </label>
+
+        <div *ngIf="selectedOption === 'copyBarcode'" class="mt-2 flex items-center gap-2">
+          <input type="text" [(ngModel)]="barcode"
+            class="w-full px-3 py-2 rounded-lg border border-primary-light focus:ring focus:ring-blue-300" />
+          <button (click)="copyBarcode()" class="bg-primary-light text-white px-3 py-2 rounded-lg hover:bg-primary">
+            Copiar
+          </button>
+        </div>
+      </div>
+
+      <!-- Botão de Ação (Dentro do Card) -->
+      <button *ngIf="selectedOption === 'sendEmail' || selectedOption === 'generatePdf' " (click)="onActionClick()"
+        class="w-full mt-4 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark">
+        {{ getButtonText() }}
+      </button>
+    </div>
+
+    <!-- Card de Acompanhamento de Prestações -->
+    <div class="bg-white p-6 rounded-lg shadow-[0px_4px_12px_rgb(160,196,255,0.5)] w-full mt-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-bold text-primary-dark">Acompanhamento de Prestações</h2>
+        <button class="text-blue-900 underline hover:text-blue-800" (click)="gerarDemonstrativoParcelas()">
+          Baixar Demonstrativo de Parcelas
+        </button>
+      </div>
+
+      <!-- Accordion para Ano -->
+      <div *ngFor="let year of [2024, 2025, 2026, 2027, 2028]" class="border-b border-neutral-300">
+        <button (click)="toggleYear(year)"
+          class="accordion-button flex justify-between w-full text-left p-4 bg-gray-100 rounded-md hover:bg-gray-200 transition">
+          <span class="font-semibold text-xl">{{ year }}</span>
+          <i class="fa-solid"
+            [ngClass]="{'fa-chevron-down': openYear !== year, 'fa-chevron-up': openYear === year}"></i>
+        </button>
+
+        <!-- Exibição das parcelas do ano -->
+        <div *ngIf="openYear === year" class="mt-2">
+          <!-- Tabela para Desktop -->
+          <div class="hidden md:block overflow-x-auto">
+            <table class="w-full border-collapse border border-neutral-300 rounded-lg">
+              <thead class="bg-gray-100 text-left">
+                <tr>
+                  <th class="border border-neutral-300 px-4 py-2">Parcela</th>
+                  <th class="border border-neutral-300 px-4 py-2">Status</th>
+                  <th class="border border-neutral-300 px-4 py-2">Data de Vencimento</th>
+                  <th class="border border-neutral-300 px-4 py-2">Valor da Parcela</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let prestacao of getPrestacoes(year)" class="hover:bg-neutral-200 transition">
+                  <td class="border border-neutral-300 px-4 py-2">{{ prestacao.parcela }}</td>
+                  <td class="border border-neutral-300 px-4 py-2 flex items-center">
+                    <span class="w-3 h-3 rounded-full mr-2" [ngClass]="{
+                        'bg-green-600': prestacao.status === 'Pago',
+                        'bg-orange-500': prestacao.status === 'Em Aberto',
+                        'bg-red-500': prestacao.status === 'Em Atraso'
+                      }">
+                    </span>
+                    {{ prestacao.status }}
+                  </td>
+                  <td class="border border-neutral-300 px-4 py-2">
+                    {{ prestacao.dataVencimento }}
+                  </td>
+                  <td class="border border-neutral-300 px-4 py-2 font-semibold">
+                    {{ prestacao.valor | customCurrency }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+          <!-- Cards para Mobile -->
+          <div class="md:hidden space-y-4">
+            <div *ngFor="let prestacao of getPrestacoes(year)"
+              class="p-4 bg-white rounded-lg shadow-md border border-gray-200 hover:bg-gray-100 transition">
+
+              <p class="text-sm font-semibold text-gray-700">Parcela</p>
+              <p class="text-lg font-bold">{{ prestacao.parcela }}</p>
+
+              <p class="text-sm font-semibold text-gray-700 mt-2">Status</p>
+              <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full" [ngClass]="{
+               'bg-green-600': prestacao.status === 'Pago',
+               'bg-orange-500': prestacao.status === 'Em Aberto',
+               'bg-red-500': prestacao.status === 'Em Atraso'
+             }">
+                </span>
+                <p class="text-base font-medium">{{ prestacao.status }}</p>
+              </div>
+
+              <p class="text-sm font-semibold text-gray-700 mt-2">Data de vencimento</p>
+              <p class="text-base font-medium">{{ prestacao.dataVencimento }}</p>
+
+              <p class="text-sm font-semibold text-gray-700 mt-2">Valor da Parcela</p>
+              <p class="text-lg font-bold">{{ prestacao.valor | customCurrency}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container do botão de voltar -->
+    <div class="w-full flex justify-end md:justify-end p-4 md:p-6">
+      <button routerLink="/home"
+        class="px-6 py-3 bg-primary text-white rounded-lg shadow-md hover:bg-primary-dark flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para Home
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mostrarModalRenegociacao" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 border border-gray-300 relative">
+    <div class="flex justify-between items-center border-b pb-4">
+      <h3 class="text-xl font-bold text-blue-900">Selecionar Prestações para Renegociação</h3>
+      <button (click)="onFecharModal()" class="text-gray-600 hover:text-gray-800">
+        <i class="fa-solid fa-xmark text-2xl"></i>
+      </button>
+    </div>
+
+    <table class="w-full border-collapse border border-gray-200 mt-4 text-sm text-gray-700">
+      <thead class="bg-gray-100 text-blue-900 font-semibold">
+        <tr>
+          <th class="p-2 border">Selecionar</th>
+          <th class="p-2 border">Parcela</th>
+          <th class="p-2 border">Vencimento</th>
+          <th class="p-2 border">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prestacao of prestacoesEmAtraso" class="border-t hover:bg-gray-50">
+          <td class="p-2 text-center border">
+            <input type="checkbox" [(ngModel)]="prestacao.selecionada" (change)="calcularTotal()" />
+          </td>
+          <td class="p-2 border">{{ prestacao.parcela }}</td>
+          <td class="p-2 border">{{ prestacao.dataVencimento | date:'dd/MM/yyyy' }}</td>
+          <td class="p-2 border font-bold text-yellow-600">{{ prestacao.valor  | customCurrency  }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-4 text-lg font-bold text-yellow-700">Total Selecionado: {{ totalSelecionado | customCurrency }}</div>
+
+    <div class="flex justify-end space-x-4 mt-6">
+      <button (click)="onFecharModal()" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400">Cancelar</button>
+      <button (click)="gerarBoletoRenegociacao()" class="px-5 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-blue-800">Renegociar Agora</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="p-4 bg-neutral-100 flex flex-col items-center border-t border-primary-light shadow-md">
+  <p class="text-sm text-primary-dark font-semibold">Desenvolvido por Aline Nink</p>
+  <div class="flex gap-4 mt-2">
+    <a href="#" class="text-primary-dark hover:text-primary transition-colors">LinkedIn</a> <span
+      class="text-secondary">|</span>
+    <a href="#" class="text-primary-dark hover:text-primary transition-colors">GitHub</a> <span
+      class="text-secondary">|</span>
+    <a href="#" class="text-primary-dark hover:text-primary transition-colors">E-mail</a>
+  </div>
+</footer>

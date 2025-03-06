@@ -1,0 +1,80 @@
+:host {
+  display: block;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Backdrop semitransparente */
+  z-index: 50; /* Garante que o modal fica no topo */
+}
+
+.bg-gray-900 {
+  background-color: #1a202c;
+}
+
+button {
+  @apply transition-colors ease-in-out duration-300;
+}
+
+/* Estilos para o Accordion */
+
+/* Mobile: Um item por vez no grid */
+@media (max-width: 640px) {
+  .accordion-mobile .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Desktop: 4 colunas para os itens */
+@media (min-width: 641px) {
+  .accordion-desktop .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Personalização do botão de Ano */
+.accordion-button {
+  @apply w-full text-left p-3 bg-neutral-100 rounded-lg hover:bg-neutral-200 font-semibold flex justify-between items-center;
+}
+
+/* Estilos para os itens do accordion */
+.accordion-item {
+  @apply grid grid-cols-4 p-2 bg-white rounded-lg shadow-sm hover:bg-neutral-200 transition;
+}
+
+.accordion-item .text-left {
+  text-align: left; /* Remover @apply aqui e aplicar diretamente */
+}
+
+.accordion-item .text-center {
+  text-align: center; /* Remover @apply aqui e aplicar diretamente */
+}
+
+/* Remover o @apply para as cores */
+.accordion-item .text-green-600 {
+  /* @apply text-green-600;  <-- Remover isso */
+  color: #48bb78; /* Cor para text-green-600 */
+}
+
+.accordion-item .text-yellow-600 {
+  /* @apply text-yellow-600;  <-- Remover isso */
+  color: #d69e2e; /* Cor para text-yellow-600 */
+}
+
+.accordion-item .text-red-600 {
+  /* @apply text-red-600;  <-- Remover isso */
+  color: #e53e3e; /* Cor para text-red-600 */
+}
+
+
+/* Corrigido para 'text-xl' */
+.accordion-header {
+  @apply text-xl font-medium;
+}
