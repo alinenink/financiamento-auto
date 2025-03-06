@@ -1,59 +1,54 @@
-# PortalAutosservico
+# Portal Financiamento Auto
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+### Sistema de Gestão de Contrato de Financimento Auto
 
-## Development server
+O **Portal Financiamento Auto** é uma aplicação moderna e responsiva que permite a visualização e gestão de prestações de financiamento, geração de boletos, adiantamento de parcelas e quitação de contratos. Desenvolvido em **Angular 19** com **Angular Signals**, Tailwind CSS e manipulação eficiente de estados, o sistema proporciona uma experiência fluida e amigável ao usuário.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🎯 **Funcionalidades Principais**
+✅ **Visualização de Prestações**: Acompanhamento detalhado das parcelas em aberto, pagas e vencidas.  
+✅ **Geração de Boletos**: Emissão de boletos dinâmicos com valores calculados automaticamente.  
+✅ **Adiantamento de Parcelas**: Simulação e pagamento antecipado de prestações com cálculo automático de descontos.  
+✅ **Quitação de Contrato**: Possibilidade de quitar todas as prestações com desconto de 25% aplicado.  
+✅ **Código de Barras**: Geração e cópia fácil do código de barras para pagamento online.  
+✅ **Alertas Personalizados**: Notificações dinâmicas para eventos importantes, como vencimentos e pagamentos.  
+✅ **Interface Responsiva**: Totalmente adaptável para dispositivos móveis e desktops.  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠️ **Tecnologias Utilizadas**
+- **Angular 19** (Standalone Components, Signals)
+- **Tailwind CSS** (Estilização moderna e responsiva)
+- **RxJS** (Gerenciamento reativo de estados)
+- **Angular Router** (Navegação entre páginas)
+- **Font Awesome** (Ícones interativos)
+- **TypeScript** (Código tipado e robusto)
+- **jsPDF + autoTable** (Geração de boletos em PDF)
+- **LocalStorage** (Persistência de dados do usuário)
+- **Mock JSON** (Dados simulados para a aplicação)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## **Como Executar o Projeto**
+1. Clonar o Repositório
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+git clone https://github.com/seu-usuario/portal-financeiro.git
+cd portal-financeiro
 
-```bash
-ng generate --help
-```
 
-## Building
+2. Instale as dependências:
+   npm install
 
-To build the project run:
+3. Execute o servidor de desenvolvimento:
+   ng serve
 
-```bash
-ng build
-```
+4. Acesse no navegador:
+   http://localhost:4200
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+👩‍💻 Autor
 
-## Running unit tests
+Este projeto foi desenvolvido por Aline Nink, desenvolvedora front-end com foco em criar aplicações modernas e responsivas. Sempre buscando aprender e melhorar, este portfólio reflete meu trabalho e paixão pela tecnologia.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+🌐 Acesse
+Você pode conferir meu portfólio em: https://alinenink.github.io/alinenink
