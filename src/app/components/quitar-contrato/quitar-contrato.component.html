@@ -1,0 +1,172 @@
+<div class="min-h-screen flex flex-col bg-neutral-100 text-neutral-600">
+  <!-- Cabeçalho -->
+  <header class="p-4 bg-white flex justify-between items-center border-b border-primary-light shadow-md">
+    <h1 class="text-lg font-semibold text-primary-dark flex items-center gap-2">
+      Quitar Contrato
+    </h1>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-1 p-6 space-y-6 overflow-y-auto">
+    <!-- Card Único Centralizado -->
+    <div class="w-full bg-white rounded-lg shadow-lg border border-neutral-300 p-8 space-y-8 card-quitacao">
+
+      <!-- Título com Ícone e Subtítulo -->
+      <div class="space-y-1 mb-6">
+        <!-- Título com Ícone (Acima) -->
+        <div class="flex items-center gap-2 text-blue-900">
+          <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
+          <h2 class="text-lg font-bold">Simule e Quite seu Contrato</h2>
+        </div>
+
+        <!-- Subtítulo em Linha Única (Logo Abaixo) -->
+        <p class="text-gray-600 text-sm">
+          Visualize os descontos e o total a pagar antes de finalizar sua quitação.
+        </p>
+      </div>
+
+      <!-- Seção de Escolha da Data -->
+      <div class="flex flex-col space-y-2">
+        <!-- Título e Subtítulo -->
+        <h3 class="text-lg font-semibold text-blue-900">Data de Quitação</h3>
+        <p class="text-gray-600 text-sm">
+          Selecione a data para quitar seu contrato. A quitação só pode ocorrer em dias úteis (segunda a sexta-feira),
+          exceto feriados e datas retroativas.
+        </p>
+
+        <!-- Campo de Data e Botão Simular (Lado a Lado) -->
+        <div class="flex items-center gap-4">
+          <!-- Campo de Data -->
+          <input type="date" [(ngModel)]="dataQuitacao" class="border border-gray-300 rounded-lg px-4 py-2 w-64 text-gray-700 
+                        focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+
+          <!-- Botão Simular com Validação -->
+          <button (click)="validarDataQuitacao()" [disabled]="!dataQuitacao" class="px-6 py-3 bg-primary text-white rounded-lg shadow-md 
+       hover:bg-primary-dark hover:scale-105 transition-all 
+       disabled:opacity-50 disabled:cursor-not-allowed">
+            Simular
+          </button>
+
+
+        </div>
+
+        <!-- Componente de Alerta -->
+        <app-alert *ngIf="alertMessage()" [type]="alertType()" [message]="alertMessage() || ''" [autoClose]="true">
+        </app-alert>
+      </div>
+
+
+      <!-- Exibição de Informações com Ícones -->
+      <div *ngIf="showResult" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Valor Total -->
+        <div class="p-5 border rounded-lg flex items-center gap-3 shadow-sm bg-white">
+          <i class="fa-solid fa-dollar-sign text-blue-900 text-2xl"></i>
+          <div>
+            <p class="font-medium text-blue-900 text-sm">Valor Total:</p>
+            <p class="text-1xl font-bold">{{ valorTotal | currency:'BRL' }}</p>
+          </div>
+        </div>
+
+        <!-- Desconto -->
+        <div class="p-2 border rounded-lg flex items-center gap-3 shadow-sm bg-white">
+          <i class="fa-solid fa-percent text-secondary text-2xl"></i>
+          <div>
+            <p class="font-medium text-blue-900 text-sm">Desconto ({{ desconto }}%):</p>
+            <p class="text-1xl font-bold">{{ (valorTotal * (desconto / 100)) | currency:'BRL' }}</p>
+          </div>
+        </div>
+
+        <!-- Total a Pagar -->
+        <div class=" p-6 border rounded-lg bg-gray-100 flex items-center gap-3 shadow-sm">
+          <i class="fa-solid fa-wallet text-blue-900 text-2xl"></i>
+          <div>
+            <p class="font-medium text-blue-900 text-base">Total a Pagar:</p>
+            <p class="text-1xl font-bold text-blue-900">{{ novoCusto | currency:'BRL' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Link para Termos e Condições -->
+      <div *ngIf="showResult">
+        <a href="javascript:void(0)" class="text-blue-900 hover:text-blue-900 underline text-sm"
+          (click)="abrirTermos()">
+          Ler Termos e Condições de Uso
+        </a>
+      </div>
+
+      <!-- Checkbox de Confirmação -->
+      <label *ngIf="showResult" class="flex items-center space-x-2 cursor-pointer text-base">
+        <input type="checkbox" [(ngModel)]="aceitouTermos" class="hidden" />
+        <div class="w-6 h-6 border-2 border-blue-700 rounded flex items-center justify-center">
+          <i *ngIf="aceitouTermos" class="fa-solid fa-check text-blue-900"></i>
+        </div>
+        <span class="text-gray-700 text-sm">Li e estou ciente dos termos.</span>
+      </label>
+
+      <!-- Botão "Quitar Agora" -->
+      <div *ngIf="showResult" class="flex justify-end mt-6">
+        <button (click)="gerarBoleto()" [disabled]="!aceitouTermos" class="px-6 py-3 bg-primary text-white rounded-lg shadow-md 
+         hover:bg-primary-dark hover:scale-105 transition-all 
+         disabled:opacity-50 disabled:cursor-not-allowed text-base font-semibold">
+          Quitar Agora
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Botão de Voltar para Home -->
+    <div class="flex justify-end mt-4">
+      <button routerLink="/home"
+        class="px-6 py-3 bg-primary text-white rounded-lg shadow-md hover:bg-primary-dark flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para Home
+      </button>
+    </div>
+  </main>
+
+  <!-- Modal de Termos e Condições -->
+  <div *ngIf="mostrarTermos" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div class="bg-white rounded-lg shadow-2xl max-w-lg w-full p-8 relative">
+      <h2 class="text-2xl font-bold mb-4">Termos e Condições de Uso</h2>
+      <p class="mb-4">
+        Este documento descreve os termos e condições para o uso da simulação de quitação de contrato. Ao utilizar esta
+        plataforma, você concorda com os termos abaixo:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Uso da Plataforma:</strong> Esta ferramenta é destinada apenas para simulação e consulta de valores
+          de quitação de contratos.</li>
+        <li><strong>Precisão das Informações:</strong> Os valores apresentados são aproximados e podem sofrer
+          alterações. Consulte o atendimento oficial para valores exatos.</li>
+        <li><strong>Confidencialidade:</strong> Seus dados são tratados com segurança e utilizados apenas para esta
+          simulação.</li>
+        <li><strong>Restrições:</strong> A simulação não gera obrigações contratuais. O boleto gerado é válido somente
+          se confirmado pelo setor financeiro.</li>
+        <li><strong>Alterações:</strong> Estes termos podem ser atualizados a qualquer momento. É sua responsabilidade
+          revisá-los periodicamente.</li>
+      </ul>
+      <p class="mt-4">
+        Ao clicar em “Li e estou ciente dos termos”, você reconhece que leu, entendeu e concorda com estes Termos e
+        Condições.
+      </p>
+      <button (click)="fecharTermos()" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+        <i class="fa-solid fa-xmark text-2xl"></i>
+      </button>
+      <div class="mt-6 flex justify-end">
+        <button (click)="fecharTermos()" class="px-5 py-2 bg-primary text-white rounded hover:bg-primary-dark text-sm">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="p-4 bg-neutral-100 flex flex-col items-center border-t border-primary-light shadow-md">
+    <p class="text-sm text-primary-dark font-semibold">Desenvolvido por Aline Nink</p>
+    <div class="flex gap-4 mt-2">
+      <a href="#" class="text-primary-dark hover:text-primary transition-colors text-sm">LinkedIn</a>
+      <span class="text-secondary">|</span>
+      <a href="#" class="text-primary-dark hover:text-primary transition-colors text-sm">GitHub</a>
+      <span class="text-secondary">|</span>
+      <a href="#" class="text-primary-dark hover:text-primary transition-colors text-sm">E-mail</a>
+    </div>
+  </footer>
+</div>
