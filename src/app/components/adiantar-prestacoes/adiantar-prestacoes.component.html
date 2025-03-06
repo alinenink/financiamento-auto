@@ -1,0 +1,176 @@
+<div class="min-h-screen flex flex-col bg-neutral-100 text-neutral-600">
+  <!-- Cabeçalho -->
+  <header class="p-4 bg-white flex justify-between items-center border-b border-primary-light shadow-md">
+    <h1 class="text-lg font-semibold text-primary-dark flex items-center gap-2">
+      Adiantar Prestações
+    </h1>
+  </header>
+
+  <app-alert *ngIf="alertMessage()" [type]="alertType()" [message]="alertMessage() || ''" [autoClose]="true">
+  </app-alert>
+
+  <!-- Conteúdo Principal -->
+  <main class="flex-1 p-4 md:p-6 space-y-6 overflow-y-auto">
+    <!-- Bloco de Simulação -->
+    <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border border-neutral-300">
+      <h2 class="text-lg font-bold text-primary-dark mb-2">
+        <i class="fa-solid fa-hand-holding-dollar text-primary-dark"></i> Simulação de Adiantamento
+      </h2>
+      <p class="text-sm text-neutral-600 mb-4">
+        Você pode inserir quantas prestações deseja adiantar ou selecionar individualmente na tabela abaixo.
+      </p>
+
+      <!-- Input para número de prestações -->
+      <label class="block text-sm font-medium text-neutral-700 mb-2">Número de Prestações:</label>
+      <input type="text" [(ngModel)]="numPrestacoes" (input)="validarNumeroPrestacoes()"
+        (change)="atualizarSelecaoAutomatica()"
+        class="w-full px-3 py-2 rounded-lg border border-primary-light focus:ring focus:ring-blue-300"
+        placeholder="Ex: 10" maxlength="2" />
+
+      <!-- Alerta para quitação do contrato -->
+      <div *ngIf="showQuitarContratoAlert"
+        class="bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded-lg shadow-md w-full mt-4">
+        <strong>Parabéns!</strong> Você pode quitar o contrato agora.
+        <button (click)="quitarContrato()" class="ml-2 text-orange-600 font-bold underline hover:text-orange-800">Clique
+          aqui</button>
+      </div>
+
+
+      <!-- Opções para selecionar primeiras ou últimas prestações -->
+      <div class="mt-3 flex flex-col gap-2">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="boletoOption" class="hidden" name="tipoSelecao" [(ngModel)]="tipoSelecao"
+            value="primeiras" (change)="atualizarSelecaoAutomatica()" class="hidden" />
+          <span
+            class="w-5 h-5 flex justify-center items-center border border-primary-dark rounded-full transition-all duration-300"
+            [ngClass]="{'bg-gradient-to-r from-blue-500 to-blue-300': tipoSelecao === 'primeiras'}">
+          </span>
+          <span class="text-neutral-800 text-sm md:text-base">Adiantar as primeiras prestações</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="tipoSelecao" class="hidden" [(ngModel)]="tipoSelecao" value="ultimas"
+            (change)="atualizarSelecaoAutomatica()" class="hidden" />
+          <span
+            class="w-5 h-5 flex justify-center items-center border border-primary-dark rounded-full transition-all duration-300"
+            [ngClass]="{'bg-gradient-to-r from-blue-500 to-blue-300': tipoSelecao === 'ultimas'}">
+          </span>
+          <span class="text-neutral-800 text-sm md:text-base">Adiantar as últimas prestações</span>
+        </label>
+      </div>
+
+      <!-- Exibição dos totais da simulação -->
+      <div *ngIf="valorTotalSimulacao && tipoSelecao" class="mt-4 text-neutral-700">
+        <p class="text-sm md:text-base"><strong>Desconto Total:</strong> <span class="text-green-600">{{
+            totalDescontoSimulacao | customCurrency }}</span></p>
+        <p class="text-sm md:text-base"><strong>Valor Final a Pagar:</strong> <span
+            class="text-primary-dark font-semibold">{{ valorTotalSimulacao | customCurrency }}</span></p>
+      </div>
+
+      <!-- Botão para gerar boleto na simulação -->
+      <button *ngIf="numPrestacoes && tipoSelecao" (click)="gerarBoletoSimulacao()"
+        class="w-full mt-4 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark flex items-center justify-center gap-2">
+        <i class="fa-solid fa-file-invoice"></i> Gerar Boleto
+      </button>
+    </div>
+
+    <!-- Bloco da Tabela -->
+    <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border border-neutral-300 mt-6">
+      <h2 class="text-lg font-bold text-primary-dark mb-2">
+        <i class="fa-solid fa-hand-holding-dollar text-primary-dark"></i> Prestações
+      </h2>
+      <button (click)="toggleTabela()"
+        class="w-full text-left p-3 bg-neutral-100 rounded-lg hover:bg-neutral-200 font-semibold flex justify-between items-center">
+        <span class="text-sm md:text-base">
+          Aqui você consegue visualizar todas as prestações do seu financiamento e selecionar quais delas deseja
+          adiantar o pagamento
+        </span>
+        <i class="fa-solid" [ngClass]="{'fa-chevron-down': !tabelaAberta, 'fa-chevron-up': tabelaAberta}"></i>
+      </button>
+      <div *ngIf="tabelaAberta" class="mt-4">
+
+        <!-- Linha de totais e botão Gerar Boleto -->
+        <div *ngIf="hasSelectedTabela"
+          class="mt-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between p-3 border-t gap-4">
+          <!-- Totais -->
+
+          <!-- Exibição dos totais da simulação -->
+          <div class="text-neutral-700 text-left md:text-left">
+            <p class="text-sm md:text-base"><strong>Desconto Total: </strong> <span class="text-green-600">{{
+                totalDescontoTabela | customCurrency }}</span></p>
+            <p class="text-sm md:text-base"><strong>Total Prestação(s) Selecionada(s): </strong> <span
+                class="text-primary-dark font-semibold">{{ valorTotalTabelaSemDesconto | customCurrency }}</span></p>
+
+            <p class="text-sm md:text-base"><strong>Valor total a pagar: </strong> <span
+                class="text-primary-dark font-semibold">{{ valorTotalTabelaComDesconto | customCurrency }}</span></p>
+          </div>
+
+          <!-- Botão Gerar Boleto -->
+          <button (click)="gerarBoletoTabela()"
+            class="w-full md:w-auto bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark flex items-center justify-center gap-2">
+            <i class="fa-solid fa-file-invoice"></i> Gerar Boleto
+          </button>
+        </div>
+
+
+
+        <!-- Checkbox para Selecionar Todas -->
+        <div class="flex items-center mb-2">
+          <label class="flex items-center text-primary-dark cursor-pointer">
+            <input type="checkbox" [(ngModel)]="todasSelecionadasTabela" (change)="selecionarTodasTabela($event)"
+              class="hidden" />
+            <span
+              class="w-5 h-5 flex justify-center items-center border border-primary-dark rounded-full transition-all duration-300"
+              [ngClass]="{'bg-gradient-to-r from-blue-500 to-blue-300': todasSelecionadasTabela}">
+            </span>
+            <span class="ml-3 text-neutral-800 text-sm md:text-base">Selecionar Todas</span>
+          </label>
+        </div>
+
+        <!-- Tabela Paginada -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm md:text-base">
+            <thead>
+              <tr class="bg-neutral-200 text-neutral-700">
+                <th class="p-3">Selecionar</th>
+                <th class="p-3">Prestação</th>
+                <th class="p-3">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let prestacao of prestacoesTabelaPagina" class="border-t">
+                <td class="p-3">
+                  <input type="checkbox" [(ngModel)]="prestacao.selecionada"
+                    (change)="selecionarPrestacao($event, prestacao)" />
+
+                </td>
+                <td class="p-3">{{ prestacao.parcela }}</td>
+                <td class="p-3">{{ prestacao.valor | customCurrency }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!-- Paginação -->
+        <div class="flex justify-between items-center mt-4">
+          <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1"
+            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50">
+            <i class="fa-solid fa-chevron-left"></i> Anterior
+          </button>
+          <span class="text-sm text-primary-dark">Página {{ paginaAtual }} de {{ totalPaginasTabela }}</span>
+          <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginasTabela"
+            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50">
+            Próxima <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Container do botão de voltar -->
+    <div class="w-full flex justify-end md:justify-end p-4 md:p-6">
+      <button routerLink="/home"
+        class="px-6 py-3 bg-primary text-white rounded-lg shadow-md hover:bg-primary-dark flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para Home
+      </button>
+    </div>
+  </main>
+</div>
