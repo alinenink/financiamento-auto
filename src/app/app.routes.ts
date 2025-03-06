@@ -7,11 +7,13 @@ import { AdiantarPrestacoesComponent } from './components/adiantar-prestacoes/ad
 import { QuitarContratoComponent } from './components/quitar-contrato/quitar-contrato.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, title: 'Login' },
+  { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'home', component: HomeComponent },
   { path: 'gerar-boleto', component: ControlePrestacoesComponent, data: { animation: 'GerarBoletoPage' } },
   { path: 'adiantar-parcelas', component: AdiantarPrestacoesComponent, data: { animation: 'AdiantarParcelasPage' } },
   { path: 'quitar-contrato', component: QuitarContratoComponent, data: { animation: 'QuitarContratoPage' } },
+  { path: "**", redirectTo: "/Login" },
 ];
 
 export const appRouter = [provideRouter(routes)];
