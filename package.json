@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
+    "deploy": "ng build --output-path docs --base-href /financiamento-auto/",
     "test": "ng test",
     "serve:ssr:financiamento-auto": "node dist/financiamento-auto/server/server.mjs"
   },

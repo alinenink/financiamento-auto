@@ -1,0 +1,65 @@
+{ 
+ "2024": [
+    { "numero": "1", "parcela": "1 de 52", "mes": "Setembro", "dataVencimento": "15/09/2024", "valor": 1450.33, "selecionada": false, "desconto": 0, "status":  "Pago" },
+    { "numero": "2", "parcela": "2 de 52", "mes": "Outubro", "dataVencimento": "15/10/2024", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Pago" },
+    { "numero": "3", "parcela": "3 de 52", "mes": "Novembro", "dataVencimento": "15/11/2024", "valor": 1450.33, "selecionada": false, "desconto": 0, "status":  "Pago" },
+    { "numero": "4", "parcela": "4 de 52", "mes": "Dezembro", "dataVencimento": "15/12/2024", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Pago" }
+  ],
+  "2025": [
+    { "numero": "5", "parcela": "5 de 52", "mes": "Janeiro", "dataVencimento": "15/01/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "6", "parcela": "6 de 52", "mes": "Fevereiro", "dataVencimento": "15/02/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "7", "parcela": "7 de 52", "mes": "Março", "dataVencimento": "15/03/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "8", "parcela": "8 de 52", "mes": "Abril", "dataVencimento": "15/04/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "9", "parcela": "9 de 52", "mes": "Maio", "dataVencimento": "15/05/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "10", "parcela": "10 de 52", "mes": "Junho", "dataVencimento": "15/06/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "11", "parcela": "11 de 52", "mes": "Julho", "dataVencimento": "15/07/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "12", "parcela": "12 de 52", "mes": "Agosto", "dataVencimento": "15/08/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "13", "parcela": "13 de 52", "mes": "Setembro", "dataVencimento": "15/09/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "14", "parcela": "14 de 52", "mes": "Outubro", "dataVencimento": "15/10/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "15", "parcela": "15 de 52", "mes": "Novembro", "dataVencimento": "15/11/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "16", "parcela": "16 de 52", "mes": "Dezembro", "dataVencimento": "15/12/2025", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" }
+  ],
+    "2026": [
+    { "numero": "17", "parcela": "17 de 52", "mes": "Janeiro", "dataVencimento": "15/01/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "18", "parcela": "18 de 52", "mes": "Fevereiro", "dataVencimento": "15/02/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "19", "parcela": "19 de 52", "mes": "Março", "dataVencimento": "15/03/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "20", "parcela": "20 de 52", "mes": "Abril", "dataVencimento": "15/04/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "21", "parcela": "21 de 52", "mes": "Maio", "dataVencimento": "15/05/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "22", "parcela": "22 de 52", "mes": "Junho", "dataVencimento": "15/06/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "23", "parcela": "23 de 52", "mes": "Julho", "dataVencimento": "15/07/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "24", "parcela": "24 de 52", "mes": "Agosto", "dataVencimento": "15/08/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "25", "parcela": "25 de 52", "mes": "Setembro", "dataVencimento": "15/09/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "26", "parcela": "26 de 52", "mes": "Outubro", "dataVencimento": "15/10/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "27", "parcela": "27 de 52", "mes": "Novembro", "dataVencimento": "15/11/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+    { "numero": "28", "parcela": "28 de 52", "mes": "Dezembro", "dataVencimento": "15/12/2026", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" }
+    ],
+    "2027": [
+      { "numero": "29", "parcela": "29 de 52", "mes": "Janeiro", "dataVencimento": "15/01/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "30", "parcela": "30 de 52", "mes": "Fevereiro", "dataVencimento": "15/02/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "31", "parcela": "31 de 52", "mes": "Março", "dataVencimento": "15/03/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "32", "parcela": "32 de 52", "mes": "Abril", "dataVencimento": "15/04/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "33", "parcela": "33 de 52", "mes": "Maio", "dataVencimento": "15/05/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "34", "parcela": "34 de 52", "mes": "Junho", "dataVencimento": "15/06/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "35", "parcela": "35 de 52", "mes": "Julho", "dataVencimento": "15/07/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "36", "parcela": "36 de 52", "mes": "Agosto", "dataVencimento": "15/08/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "37", "parcela": "37 de 52", "mes": "Setembro", "dataVencimento": "15/09/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "38", "parcela": "38 de 52", "mes": "Outubro", "dataVencimento": "15/10/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "39", "parcela": "39 de 52", "mes": "Novembro", "dataVencimento": "15/11/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "40", "parcela": "40 de 52", "mes": "Dezembro", "dataVencimento": "15/12/2027", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" }
+    ],
+    "2028": [
+      { "numero": "41", "parcela": "41 de 52", "mes": "Janeiro", "dataVencimento": "15/01/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "42", "parcela": "42 de 52", "mes": "Fevereiro", "dataVencimento": "15/02/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "43", "parcela": "43 de 52", "mes": "Março", "dataVencimento": "15/03/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "44", "parcela": "44 de 52", "mes": "Abril", "dataVencimento": "15/04/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "45", "parcela": "45 de 52", "mes": "Maio", "dataVencimento": "15/05/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "46", "parcela": "46 de 52", "mes": "Junho", "dataVencimento": "15/06/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "47", "parcela": "47 de 52", "mes": "Julho", "dataVencimento": "15/07/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "48", "parcela": "48 de 52", "mes": "Agosto", "dataVencimento": "15/08/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "49", "parcela": "49 de 52", "mes": "Setembro", "dataVencimento": "15/09/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "50", "parcela": "50 de 52", "mes": "Outubro", "dataVencimento": "15/10/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "51", "parcela": "51 de 52", "mes": "Novembro", "dataVencimento": "15/11/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" },
+      { "numero": "52", "parcela": "52 de 52", "mes": "Dezembro", "dataVencimento": "15/12/2028", "valor": 1450.33, "selecionada": false, "desconto": 0, "status": "Em Aberto" }
+    ]  
+  }
+  

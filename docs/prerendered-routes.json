@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/financiamento-auto": {},
+    "/financiamento-auto/adiantar-parcelas": {},
+    "/financiamento-auto/gerar-boleto": {},
+    "/financiamento-auto/home": {},
+    "/financiamento-auto/quitar-contrato": {}
+  }
+}
