@@ -1,0 +1,51 @@
+.icon-bell {
+  position: relative;
+  right: 10px;
+}
+
+.shadow-md {
+  --tw-shadow: 0 4px 2px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+#carousel-container {
+  overflow-x: hidden;
+}
+
+#carousel {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+span {
+  transition: background-color 0.3s;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+mat-icon {
+  height: 35px;
+  width: 33px;
+}
+
+header {
+  background-color: #F0F0F5; /* Cinza muito claro para dar leve contraste */
+  padding: 16px 20px;
+  font-weight: 600;
+}
+
+.color-flag {
+  color: #5a7c91 !important;
+}
+
+.cursor-card {
+  cursor: pointer;
+}
