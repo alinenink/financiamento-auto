@@ -1,0 +1,12 @@
+<div *ngIf="isVisible()" class="alert" [ngClass]="type">
+  <div class="flex items-center">
+    <i class="fa-solid" [ngClass]="{
+      'fa-circle-check text-green-500': type === 'success',
+      'fa-circle-xmark text-red-500': type === 'error',
+      'fa-triangle-exclamation text-yellow-500': type === 'warning',
+      'fa-circle-info text-blue-500': type === 'info'
+    }"></i>
+    <span class="ml-2">{{ message }}</span>
+  </div>
+  <button (click)="closeAlert()" class="close-btn">&times;</button>
+</div>

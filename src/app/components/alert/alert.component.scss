@@ -1,0 +1,46 @@
+.alert {
+  position: fixed; /* 🔹 Mantém o alerta fixo na tela */
+  top: 20px; /* 🔹 Distância do topo */
+  left: 50%; /* 🔹 Centraliza horizontalmente */
+  transform: translateX(-50%); /* 🔹 Corrige a centralização */
+  z-index: 9999; /* 🔹 Garante que fique acima de outros elementos */
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  max-width: 90%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-left: 6px solid;
+
+  /* 🔹 Estilos dinâmicos para diferentes tipos */
+  &.success {
+    border-color: #22c55e;
+    color: #15803d;
+  }
+  &.error {
+    border-color: #ef4444;
+    color: #b91c1c;
+  }
+  &.warning {
+    border-color: #facc15;
+    color: #b45309;
+  }
+  &.info {
+    border-color: #3b82f6;
+    color: #1e40af;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 16px;
+    color: inherit;
+  }
+}
