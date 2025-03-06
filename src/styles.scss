@@ -1,0 +1,84 @@
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Importação das fontes
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Estilo Global */
+body {
+  @apply bg-black text-yellow-500;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Títulos e Botões */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+/* Parágrafos e textos menores */
+p, span, input, textarea {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+
+/* Transição de tela suave */
+:host {
+  display: block;
+  animation: slideIn 0.5s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Placeholder */
+input::placeholder {
+  @apply text-yellow-500;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Botões Gerais */
+button {
+  @apply transition-colors ease-in-out duration-300; /* Transições suaves */
+}
+
+/* Transição suave para SVGs */
+svg circle {
+  transition: stroke-dasharray 0.3s ease;
+}
+
+ul {
+  @apply list-none p-0; /* Remove bullets e padding */
+}
+
+/* Botões do Popup */
+.popup-button {
+  @apply bg-yellow-500 text-black px-4 py-2 rounded;
+}
+
+.popup-button:hover {
+  @apply bg-yellow-600;
+}
+
+/* Definição do HTML e Body */
+html, body { height: 100%; }
+body { margin: 0; }
