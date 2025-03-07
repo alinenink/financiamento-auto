@@ -49,8 +49,8 @@ interface Prestacao {
 })
 export class HomeComponent {
   currentIndex = 0;
-  totalPrestacoes: number = 45;
-  prestacoesPagas: number = 10;
+  totalPrestacoes: number = 52;
+  prestacoesPagas: number = 4;
   prestacoesAtrasadas: number = 2;
   prestacoesAVencer: number =
     this.totalPrestacoes - (this.prestacoesPagas + this.prestacoesAtrasadas);
