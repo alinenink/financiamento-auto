@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdiantarPrestacoesComponent } from './adiantar-prestacoes.component';
+import { describe, beforeEach, it } from 'node:test';
 
 describe('AdiantarPrestacoesComponent', () => {
   let component: AdiantarPrestacoesComponent;

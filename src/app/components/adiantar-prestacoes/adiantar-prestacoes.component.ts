@@ -36,7 +36,7 @@ interface Prestacao {
     AlertComponent,
   ],
   templateUrl: './adiantar-prestacoes.component.html',
-  styleUrls: ['./adiantar-prestacoes.component.css'],
+  styleUrls: ['./adiantar-prestacoes.component.scss'],
 })
 export class AdiantarPrestacoesComponent {
   showQuitarContratoAlert = false;

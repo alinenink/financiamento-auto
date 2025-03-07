@@ -23,7 +23,7 @@ interface Prestacao {
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule, AlertComponent],
   templateUrl: './quitar-contrato.component.html',
-  styleUrls: ['./quitar-contrato.component.css'],
+  styleUrls: ['./quitar-contrato.component.scss'],
 })
 export class QuitarContratoComponent {
   /** Lista de feriados utilizados para validação da data de quitação. */
